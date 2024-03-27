@@ -1,7 +1,16 @@
+using Coursework.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 //Начало
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Строка подключения DbContext
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
